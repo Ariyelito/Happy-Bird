@@ -14,9 +14,9 @@ class Bird:
         self.pos_x = 50
         self.pos_y = 325
         self.saut = False
-        self.saut_duree = 30
-        self.saut_temps = 0
-        self.gravite = 1
+        self.saut_duree = 0
+        self.saut_temps = 20000000000000
+        self.gravite = 2.5
         self.rect = False
 
     def dessiner(self, screen):
