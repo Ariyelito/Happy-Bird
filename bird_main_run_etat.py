@@ -1,6 +1,7 @@
 import pygame
 from background import *
 from bird import *
+from musique import *
 
 
 pygame.init()
@@ -13,10 +14,10 @@ pygame.display.set_caption("Flappy Bird made by Ricardo!")
 
 arriere_plan = ArrierePlan(640, 480)
 bird = Bird()
+musique = Musique()
 #obstacle = Boite()
-
 running = True
-
+musique.jouerMusique()
 while running:
 
     for event in pygame.event.get():
