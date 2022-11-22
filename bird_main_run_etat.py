@@ -15,7 +15,7 @@ pygame.display.set_caption("Flappy Bird made by Ricardo!")
 arriere_plan = ArrierePlan(640, 480)
 bird = Bird()
 musique = Musique()
-#obstacle = Boite()
+#obstacle = "Boite()"
 running = True
 musique.jouerMusique()
 while running:
@@ -31,7 +31,7 @@ while running:
     #obstacle.dessiner(screen)
 
     #if bird.detect_collision(obstacle.rect):
-      #  print("CollisionS")
+        #running = False
 
     pygame.display.update()
     fpsClock.tick(FPS)
