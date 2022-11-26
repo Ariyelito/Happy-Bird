@@ -8,32 +8,29 @@ import random
 
 class Obstacle(pygame.sprite.Sprite):
 
-   
+    def __init__(self, inverse, xpos, ydimenssion):
 
-    def __init__(self, inverted, xpos, ysize):
+        LARGEUR_ECRAN = 640
+        HAUTEUR_ECRAN = 480
 
-        #VARIABLES
-        SCREEN_WIDHT = 640
-        SCREEN_HEIGHT = 480
-
-        PIPE_WIDHT = 80
-        PIPE_HEIGHT = 500
+        LARGEUR_OBSTACLE = 80
+        HAUTEUR_OBSTACLE = 500
 
         pygame.sprite.Sprite.__init__(self)
         pygame.init()
-        pygame.display.set_mode((SCREEN_WIDHT, SCREEN_HEIGHT))
+        pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
         self. image = pygame.image.load('img/background/Obstacle.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image, (PIPE_WIDHT, PIPE_HEIGHT))
+        self.image = pygame.transform.scale(self.image, (LARGEUR_OBSTACLE, HAUTEUR_OBSTACLE))
 
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos
 
-        if inverted:
+        if inverse:
             self.image = pygame.transform.flip(self.image, False, True)
-            self.rect[1] = - (self.rect[3] - ysize)
+            self.rect[1] = - (self.rect[3] - ydimenssion)
         else:
-            self.rect[1] = SCREEN_HEIGHT - ysize
+            self.rect[1] = HAUTEUR_ECRAN - ydimenssion
 
 
         self.mask = pygame.mask.from_surface(self.image)

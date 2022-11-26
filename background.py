@@ -11,17 +11,16 @@ class ArrierePlan(pygame.sprite.Sprite):
     
     def __init__(self, xpos):
 
-        #VARIABLES
-        self.SCREEN_WIDHT = 640
-        self.SCREEN_HEIGHT = 480
-        self.GAME_SPEED = 15
+        self.LARGEUR_ECRAN = 640
+        self.HAUTEUR_ECRAN = 480
+        self.VITESSE_JEU = 15
 
-        self.GROUND_HEIGHT= 640
-        self.PIPE_GAP = 150
+        self.HAUTEUR_ARRIEREPLAN= 640
+        self.ESPACE_OBSTACLE = 150
 
         pygame.sprite.Sprite.__init__(self)
         pygame.init()
-        pygame.display.set_mode((self.SCREEN_WIDHT, self.SCREEN_HEIGHT))
+        pygame.display.set_mode((self.LARGEUR_ECRAN, self.HAUTEUR_ECRAN))
         self.image = pygame.image.load('img/background/flappy_bird_bg3.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (2*640, 100))
 
@@ -29,16 +28,16 @@ class ArrierePlan(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos
-        self.rect[1] = self.SCREEN_HEIGHT - self.GROUND_HEIGHT
+        self.rect[1] = self.HAUTEUR_ECRAN - self.HAUTEUR_ARRIEREPLAN
 
     def update(self):
-        self.rect[0] -= self.GAME_SPEED
+        self.rect[0] -= self.VITESSE_JEU
 
     def is_off_screen(self,sprite):
          return sprite.rect[0] < -(sprite.rect[2])
 
-    def get_random_pipes(self,xpos):
-        size = random.randint(100, 300)
-        pipe = Obstacle(False, xpos, size)
-        pipe_inverted = Obstacle(True, xpos, self.SCREEN_HEIGHT - size - self.PIPE_GAP)
-        return pipe, pipe_inverted
+    def get_random_obstacle(self,xpos):
+        hauteur = random.randint(100, 300)
+        obstacle = Obstacle(False, xpos, hauteur)
+        obstacle_inverse = Obstacle(True, xpos, self.HAUTEUR_ECRAN - hauteur - self.ESPACE_OBSTACLE)
+        return obstacle, obstacle_inverse
