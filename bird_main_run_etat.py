@@ -18,7 +18,7 @@ bird = Bird()
 musique = Musique()
 obstacle = Obstacle()
 running = True
-musique.jouerMusique()
+#musique.jouerMusique()
 while running:
 
     for event in pygame.event.get():

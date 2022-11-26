@@ -12,7 +12,7 @@ class Bird:
         self.image = pygame.image.load('img/bird/bird (1).png')
         self.image = pygame.transform.rotozoom(self.image, self.angle, self.echelle)
         self.pos_x = 50
-        self.pos_y = 325
+        self.pos_y = 200
         self.saut = False
         self.saut_duree = 0
         self.saut_temps = 0
