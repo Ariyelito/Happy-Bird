@@ -2,7 +2,10 @@ import pygame
 from background import *
 from bird import *
 from obstacle import *
+<<<<<<< Updated upstream
 from musique import *
+=======
+>>>>>>> Stashed changes
 
 
 pygame.init()
@@ -15,8 +18,13 @@ pygame.display.set_caption("Flappy Bird made by Ricardo!")
 
 arriere_plan = ArrierePlan(640, 480)
 bird = Bird()
+<<<<<<< Updated upstream
 musique = Musique()
 obstacle = Obstacle()
+=======
+obstacle = Obstacle()
+
+>>>>>>> Stashed changes
 running = True
 musique.jouerMusique()
 while running:
@@ -32,7 +40,11 @@ while running:
     obstacle.dessiner(screen)
 
     if bird.detect_collision(obstacle.rect):
+<<<<<<< Updated upstream
         running = False
+=======
+        print("CollisionS")
+>>>>>>> Stashed changes
 
     pygame.display.update()
     fpsClock.tick(FPS)
