@@ -10,15 +10,10 @@ SCREEN_HEIGHT = 480
 SPEED = 20
 GRAVITY = 2.5
 GAME_SPEED = 15
-
 GROUND_WIDHT = 2 * SCREEN_WIDHT
- 
-
 PIPE_WIDHT = 80
 PIPE_HEIGHT = 500
-
 PIPE_GAP = 150
-
 arriere_plan = ArrierePlan(GROUND_WIDHT - 20)
  
 pygame.init()

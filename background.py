@@ -8,9 +8,7 @@ from obstacle import *
 
 
 class ArrierePlan(pygame.sprite.Sprite):
-
-   
-
+    
     def __init__(self, xpos):
 
         #VARIABLES
