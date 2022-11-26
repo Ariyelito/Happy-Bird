@@ -3,53 +3,31 @@ Explication du scroll ici
 https://stackoverflow.com/questions/55050166/making-the-background-move-sideways-in-pygame
 '''
 import pygame
-
-class ArrierePlan:
-    def __init__(self, largeur, hauteur):
-        self.image = pygame.image.load('img/background/flappy_bird_bg3.png')
-        self.image = pygame.transform.scale(self.image, (largeur, hauteur))
-        self.largeur = largeur
-        self.hauteur = hauteur
-        self.pos_x = 0
-        self.pos_y = 0
-        self.vitesse_x = 1
-
-    def dessiner(self, screen):
-        screen.blit(self.image, (self.pos_x,0))
-        screen.blit(self.image, (self.pos_x + self.largeur,0))
-
-        self.pos_x -= self.vitesse_x
-        if self.pos_x <= -self.largeur:
-            self.pos_x = 0
+import random
+from obstacle import *
 
 
-def test():
-    print("Test")
-    pygame.init()
+class ArrierePlan(pygame.sprite.Sprite):
 
-    FPS = 60 # frames per second setting
-    fpsClock = pygame.time.Clock()
+    def __init__(self, xpos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('img/background/flappy_bird_bg3.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (2, 100))
 
-    screen = pygame.display.set_mode([640, 480])
-    pygame.display.set_caption("Flappy Bird made by Ricardo!")
+        self.mask = pygame.mask.from_surface(self.image)
 
-    arriere_plan = ArrierePlan(640, 480)
+        self.rect = self.image.get_rect()
+        self.rect[0] = xpos
+        self.rect[1] = 640 - 480
 
-    running = True
+    def update(self):
+        self.rect[0] -= 15
 
-    while running:
+    def is_off_screen(sprite):
+         return sprite.rect[0] < -(sprite.rect[2])
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        arriere_plan.dessiner(screen)
-
-        pygame.display.update()
-        fpsClock.tick(FPS)
-
-    pygame.quit()
-
-if __name__ == '__main__':
-    test()
-
+    def get_random_pipes(xpos):
+        size = random.randint(100, 300)
+        pipe = Obstacle(False, xpos, size)
+        pipe_inverted = Obstacle(True, xpos, 640 - size - 150)
+        return pipe, pipe_inverted

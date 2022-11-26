@@ -6,20 +6,26 @@ Created on 27 avr. 2022
 import pygame
 import random
 
-class Obstacle:
-    def __init__(self):
-        self.angle = 0
-        self.echelle = 0.8
-        self.image = pygame.image.load('img/background/Obstacle.png')
-        self.image = pygame.transform.rotozoom(self.image, self.angle, self.echelle)
-        self.pos_x = 0
-        self.pos_y = 135
-        self.vitesse = 2
-        self.rect = False
-        
-    def dessiner(self, screen):
-        self.rect = screen.blit(self.image, (self.pos_x, self.pos_y))
-        self.pos_x -= self.vitesse
-        if self.pos_x < -50:
-            self.pos_x = random.randint(700, 800)
-            self.vitesse = random.randint(2, 5)
+class Obstacle(pygame.sprite.Sprite):
+    def __init__(self, inverted, xpos, ysize):
+        pygame.sprite.Sprite.__init__(self)
+
+        self. image = pygame.image.load('img/background/Obstacle.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (80, 500))
+
+
+        self.rect = self.image.get_rect()
+        self.rect[0] = xpos
+
+        if inverted:
+            self.image = pygame.transform.flip(self.image, False, True)
+            self.rect[1] = - (self.rect[3] - ysize)
+        else:
+            self.rect[1] = 640 - ysize
+
+
+        self.mask = pygame.mask.from_surface(self.image)
+
+
+    def update(self):
+        self.rect[0] -= 15

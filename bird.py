@@ -5,32 +5,34 @@ Created on 27 avr. 2022
 '''
 import pygame
 
-class Bird:
+class Bird(pygame.sprite.Sprite):
+
     def __init__(self):
-        self.angle = 0
-        self.echelle = 0.7
-        self.image = pygame.image.load('img/bird/bird (1).png')
-        self.image = pygame.transform.rotozoom(self.image, self.angle, self.echelle)
-        self.pos_x = 50
-        self.pos_y = 200
-        self.saut = False
-        self.saut_duree = 0
-        self.saut_temps = 0
-        self.gravite = 2
-        self.rect = False
+        pygame.sprite.Sprite.__init__(self)
 
-    def dessiner(self, screen):
-        self.rect = screen.blit(self.image, (self.pos_x, self.pos_y))
-        if self.pos_y < 325:
-            self.pos_y += self.gravite
-        if self.saut:
-            self.pos_y -= 4
-            self.saut_temps += 1
-            if self.saut_temps > 40:
-                self.saut = False
-                self.saut_temps = 0
+        self.images =  [pygame.image.load('img/bird/bird (1).png').convert_alpha(),]
 
-    def detect_collision(self, rect):
-        if self.rect.colliderect(rect):
-            return True
-        return False
+        self.speed = 20
+
+        self.current_image = 0
+        self.image = pygame.image.load('img/bird/bird (1).png').convert_alpha()
+        self.mask = pygame.mask.from_surface(self.image)
+
+        self.rect = self.image.get_rect()
+        self.rect[0] = 480 / 6
+        self.rect[1] = 640 / 2
+
+    def update(self):
+        self.current_image = (self.current_image + 1) % 3
+        self.image = self.images[self.current_image]
+        self.speed += 2.5
+
+        #UPDATE HEIGHT
+        self.rect[1] += self.speed
+
+    def bump(self):
+        self.speed = -20
+
+    def begin(self):
+        self.current_image = (self.current_image + 1) % 3
+        self.image = self.images[self.current_image]

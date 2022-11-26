@@ -1,0 +1,89 @@
+  def __init__(self):
+        self.angle = 0
+        self.echelle = 0.7
+        self.image = pygame.image.load('img/bird/bird (1).png')
+        self.image = pygame.transform.rotozoom(self.image, self.angle, self.echelle)
+        self.pos_x = 50
+        self.pos_y = 200
+        self.saut = False
+        self.saut_duree = 0
+        self.saut_temps = 0
+        self.gravite = 2
+        self.rect = False
+
+    def dessiner(self, screen):
+        self.rect = screen.blit(self.image, (self.pos_x, self.pos_y))
+        if self.pos_y < 325:
+            self.pos_y += self.gravite
+        if self.saut:
+            self.pos_y -= 4
+            self.saut_temps += 1
+            if self.saut_temps > 40:
+                self.saut = False
+                self.saut_temps = 0
+
+    def detect_collision(self, rect):
+        if self.rect.colliderect(rect):
+            return True
+        return False
+
+
+
+    def __init__(self, largeur, hauteur):
+        self.image = pygame.image.load('img/background/flappy_bird_bg3.png')
+        self.image = pygame.transform.scale(self.image, (largeur, hauteur))
+        self.largeur = largeur
+        self.hauteur = hauteur
+        self.pos_x = 0
+        self.pos_y = 0
+        self.vitesse_x = 1
+
+    def dessiner(self, screen):
+        screen.blit(self.image, (self.pos_x,0))
+        screen.blit(self.image, (self.pos_x + self.largeur,0))
+        for i in range (2):
+            pipes = self.get_random_pipes(480 * i + 800)
+
+        screen.blit(pipes[0])
+        screen.blit(pipes[1])
+
+        self.pos_x -= self.vitesse_x
+        if self.pos_x <= -self.largeur:
+            self.pos_x = 0
+
+
+
+
+            pygame.init()
+
+FPS = 60  # frames per second setting
+fpsClock = pygame.time.Clock()
+
+screen = pygame.display.set_mode([640, 480])
+pygame.display.set_caption("Flappy Bird made by Ricardo!")
+
+arriere_plan = ArrierePlan(640, 480)
+bird = Bird()
+musique = Musique()
+running = True
+#musique.jouerMusique()
+while running:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            bird.saut = True
+
+    arriere_plan.dessiner(screen)
+    bird.dessiner(screen)
+
+    
+
+    #if bird.detect_collision(obstacle.rect):
+        #running = False
+
+    pygame.display.update()
+    fpsClock.tick(FPS)
+
+pygame.quit() 
