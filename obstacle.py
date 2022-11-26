@@ -21,5 +21,5 @@ class Obstacle:
         self.rect = screen.blit(self.image, (self.pos_x, self.pos_y))
         self.pos_x -= self.vitesse
         if self.pos_x < -50:
-            self.pos_x = random.randint(400, 500)
+            self.pos_x = random.randint(700, 800)
             self.vitesse = random.randint(2, 5)
