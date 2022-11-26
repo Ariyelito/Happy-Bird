@@ -27,7 +27,6 @@ BACKGROUND = pygame.transform.scale(BACKGROUND, (SCREEN_WIDHT, SCREEN_HEIGHT))
 bird_group = pygame.sprite.Group()
 bird = Bird()
 bird_group.add(bird)
-
 ground_group = pygame.sprite.Group()
 
 for i in range (2):
