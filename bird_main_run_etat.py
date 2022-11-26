@@ -4,16 +4,29 @@ from bird import *
 from obstacle import *
 from musique import *
 
+#VARIABLES
+SCREEN_WIDHT = 640
+SCREEN_HEIGHT = 480
+SPEED = 20
+GRAVITY = 2.5
+GAME_SPEED = 15
 
-arriere_plan = pygame.sprite.Group()
+GROUND_WIDHT = 2 * SCREEN_WIDHT
+ 
 
+PIPE_WIDHT = 80
+PIPE_HEIGHT = 500
 
+PIPE_GAP = 150
+
+arriere_plan = ArrierePlan(GROUND_WIDHT - 20)
+ 
 pygame.init()
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((SCREEN_WIDHT, SCREEN_HEIGHT))
 pygame.display.set_caption('Flappy Bird')
 
 BACKGROUND = pygame.image.load('img/background/flappy_bird_bg3.png')
-BACKGROUND = pygame.transform.scale(BACKGROUND, (640, 480))
+BACKGROUND = pygame.transform.scale(BACKGROUND, (SCREEN_WIDHT, SCREEN_HEIGHT))
 #BEGIN_IMAGE = pygame.image.load('assets/sprites/message.png').convert_alpha()
 
 bird_group = pygame.sprite.Group()
@@ -23,16 +36,15 @@ bird_group.add(bird)
 ground_group = pygame.sprite.Group()
 
 for i in range (2):
-    ground = ArrierePlan(2*640 * i)
+    ground = ArrierePlan(GROUND_WIDHT * i)
     ground_group.add(ground)
 
 pipe_group = pygame.sprite.Group()
+
 for i in range (2):
-    pipes = arriere_plan.get_random_pipes(640 * i + 800)
+    pipes = arriere_plan.get_random_pipes(SCREEN_WIDHT * i + 800)
     pipe_group.add(pipes[0])
     pipe_group.add(pipes[1])
-
-
 
 clock = pygame.time.Clock()
 
@@ -53,12 +65,11 @@ while begin:
                 begin = False
 
     screen.blit(BACKGROUND, (0, 0))
-    screen.blit(BEGIN_IMAGE, (120, 150))
 
     if arriere_plan.is_off_screen(ground_group.sprites()[0]):
         ground_group.remove(ground_group.sprites()[0])
 
-        new_ground = arriere_plan(2*640 - 20)
+        new_ground = ArrierePlan(GROUND_WIDHT - 20)
         ground_group.add(new_ground)
 
     bird.begin()
@@ -79,7 +90,7 @@ while True:
             pygame.quit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
-                bird.bump()
+                bird.bump() 
                 pygame.mixer.music.load('instrumental.mp3')
                 pygame.mixer.music.play()
 
@@ -88,14 +99,14 @@ while True:
     if arriere_plan.is_off_screen(ground_group.sprites()[0]):
         ground_group.remove(ground_group.sprites()[0])
 
-        new_ground = arriere_plan(2*640 - 20)
+        new_ground = ArrierePlan(GROUND_WIDHT - 20)
         ground_group.add(new_ground)
 
     if arriere_plan.is_off_screen(pipe_group.sprites()[0]):
         pipe_group.remove(pipe_group.sprites()[0])
         pipe_group.remove(pipe_group.sprites()[0])
 
-        pipes = arriere_plan.get_random_pipes(640 * 2)
+        pipes = arriere_plan.get_random_pipes(SCREEN_WIDHT * 2)
 
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
