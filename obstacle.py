@@ -4,7 +4,6 @@ Created on 27 avr. 2022
 @author: gills
 '''
 import pygame
-import random
 
 class Obstacle(pygame.sprite.Sprite):
 

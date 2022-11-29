@@ -15,20 +15,21 @@ class ArrierePlan(pygame.sprite.Sprite):
         self.HAUTEUR_ECRAN = 480
         self.VITESSE_JEU = 15
 
-        self.HAUTEUR_ARRIEREPLAN= 640
+        self.HAUTEUR_SOL= 102
         self.ESPACE_OBSTACLE = 150
 
         pygame.sprite.Sprite.__init__(self)
         pygame.init()
         pygame.display.set_mode((self.LARGEUR_ECRAN, self.HAUTEUR_ECRAN))
-        self.image = pygame.image.load('img/background/flappy_bird_bg3.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image, (2*640, 100))
+        self.image = pygame.image.load('img/background/ground.png').convert_alpha()
+        self.image = pygame.transform.rotozoom(self.image,0, 2)
+        self.image = pygame.transform.scale(self.image, (3* self.HAUTEUR_ECRAN, self.HAUTEUR_SOL))
 
         self.mask = pygame.mask.from_surface(self.image)
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos
-        self.rect[1] = self.HAUTEUR_ECRAN - self.HAUTEUR_ARRIEREPLAN
+        self.rect[1] = self.HAUTEUR_ECRAN - self.HAUTEUR_SOL
 
     def update(self):
         self.rect[0] -= self.VITESSE_JEU

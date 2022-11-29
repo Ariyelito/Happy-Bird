@@ -6,13 +6,7 @@ from musique import *
 
 LARGEUR_ECRAN = 640
 HAUTEUR_ECRAN = 480
-VITESSE = 20
-GRAVITE = 2.5
-VITESSE_JEU = 15
 LARGEUR_SOL = 2 * LARGEUR_ECRAN
-LARGEUR_OBSTACLE = 80
-HAUTEUR_OBSTACLE = 500
-ESPACE_OBSTACLE = 150
 arriere_plan = ArrierePlan(LARGEUR_SOL - 20)
  
 pygame.init()
@@ -30,8 +24,8 @@ musique.jouerMusique()
 bird_group = pygame.sprite.Group()
 bird = Bird()
 bird_group.add(bird)
-ground_group = pygame.sprite.Group()
 
+ground_group = pygame.sprite.Group()
 for i in range (2):
     ground = ArrierePlan(LARGEUR_SOL * i)
     ground_group.add(ground)
@@ -57,7 +51,6 @@ while begin:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                 bird.saut()
-               
                 begin = False
 
     screen.blit(BACKGROUND, (0, 0))
@@ -99,7 +92,7 @@ while True:
         pipe_group.remove(pipe_group.sprites()[0])
         pipe_group.remove(pipe_group.sprites()[0])
 
-        pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * 2)
+        pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * 2  )
 
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
@@ -116,6 +109,5 @@ while True:
 
     if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
             pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
-        pygame.mixer.music.load('instrumental.mp3')
-        pygame.mixer.music.play()
+        #ajouter une musique de fin
         break
