@@ -20,7 +20,6 @@ class Bird(pygame.sprite.Sprite):
 
         self.image = pygame.image.load('img/bird/bird (1).png').convert_alpha()
         self.image = pygame.transform.rotozoom(self.image,0, 0.4)
-        self.mask = pygame.mask.from_surface(self.image)
 
         self.rect = self.image.get_rect()
 

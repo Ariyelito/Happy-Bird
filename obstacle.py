@@ -31,9 +31,5 @@ class Obstacle(pygame.sprite.Sprite):
         else:
             self.rect[1] = HAUTEUR_ECRAN - ydimenssion
 
-
-        self.mask = pygame.mask.from_surface(self.image)
-
-
     def update(self):
         self.rect[0] -= 15

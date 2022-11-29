@@ -13,8 +13,7 @@ pygame.init()
 
 musique = Musique()
 screen = pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
-pygame.display.set_caption('Flappy Bird')
-
+pygame.display.set_caption('Happy Bird')
 BACKGROUND = pygame.image.load('img/background/flappy_bird_bg3.png')
 BACKGROUND = pygame.transform.scale(BACKGROUND, (LARGEUR_ECRAN, HAUTEUR_ECRAN))
 #BEGIN_IMAGE = pygame.image.load('assets/sprites/message.png').convert_alpha()
@@ -22,15 +21,15 @@ BACKGROUND = pygame.transform.scale(BACKGROUND, (LARGEUR_ECRAN, HAUTEUR_ECRAN))
 musique.jouerMusique()
 
 bird_group = pygame.sprite.Group()
+ground_group = pygame.sprite.Group()
+pipe_group = pygame.sprite.Group()
+
 bird = Bird()
 bird_group.add(bird)
 
-ground_group = pygame.sprite.Group()
 for i in range (2):
     ground = ArrierePlan(LARGEUR_SOL * i)
     ground_group.add(ground)
-
-pipe_group = pygame.sprite.Group()
 
 for i in range (2):
     pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * i + 800)
@@ -40,7 +39,6 @@ for i in range (2):
 clock = pygame.time.Clock()
 
 begin = True
-
 while begin:
 
     clock.tick(15)
@@ -92,7 +90,7 @@ while True:
         pipe_group.remove(pipe_group.sprites()[0])
         pipe_group.remove(pipe_group.sprites()[0])
 
-        pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * 2  )
+        pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * 2)
 
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])

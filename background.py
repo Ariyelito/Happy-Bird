@@ -22,10 +22,7 @@ class ArrierePlan(pygame.sprite.Sprite):
         pygame.init()
         pygame.display.set_mode((self.LARGEUR_ECRAN, self.HAUTEUR_ECRAN))
         self.image = pygame.image.load('img/background/ground.png').convert_alpha()
-        self.image = pygame.transform.rotozoom(self.image,0, 2)
         self.image = pygame.transform.scale(self.image, (3* self.HAUTEUR_ECRAN, self.HAUTEUR_SOL))
-
-        self.mask = pygame.mask.from_surface(self.image)
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos
@@ -38,7 +35,7 @@ class ArrierePlan(pygame.sprite.Sprite):
          return sprite.rect[0] < -(sprite.rect[2])
 
     def get_random_obstacle(self,xpos):
-        hauteur = random.randint(100, 300)
+        hauteur = random.randint(102, 300)
         obstacle = Obstacle(False, xpos, hauteur)
         obstacle_inverse = Obstacle(True, xpos, self.HAUTEUR_ECRAN - hauteur - self.ESPACE_OBSTACLE)
         return obstacle, obstacle_inverse
