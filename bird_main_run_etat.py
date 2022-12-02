@@ -16,7 +16,7 @@ screen = pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
 pygame.display.set_caption('Happy Bird')
 BACKGROUND = pygame.image.load('img/background/flappy_bird_bg3.png')
 BACKGROUND = pygame.transform.scale(BACKGROUND, (LARGEUR_ECRAN, HAUTEUR_ECRAN))
-# BEGIN_IMAGE = pygame.image.load('assets/sprites/message.png').convert_alpha()
+
 
 musique.jouerMusique()
 
@@ -42,7 +42,6 @@ begin = True
 while begin:
 
     clock.tick(15)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -50,8 +49,8 @@ while begin:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                 bird.saut()
                 begin = False
-
     screen.blit(BACKGROUND, (0, 0))
+  
 
     if arriere_plan.is_off_screen(ground_group.sprites()[0]):
         ground_group.remove(ground_group.sprites()[0])
