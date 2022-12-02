@@ -68,8 +68,7 @@ while begin:
 
     pygame.display.update()
 
-running = True
-while running:
+while True:
 
     clock.tick(15)
 
@@ -108,14 +107,10 @@ while running:
     if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
             pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
             print('Colision')
-            running = False
-            running = False
-
              #ajouter une musique de fin
             text = font.render('Nouvelle Partie', True, NOIR)
             textRect = text.get_rect()
             textRect.center = (LARGEUR_ECRAN/2, HAUTEUR_ECRAN/2)
             screen.blit(text, (20,20))
             pygame.display.flip()
-           
             
