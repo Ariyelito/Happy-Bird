@@ -3,14 +3,17 @@ from background import *
 from bird import *
 from obstacle import *
 from musique import *
+# from msilib.schema import Font
 
 LARGEUR_ECRAN = 640
 HAUTEUR_ECRAN = 480
 LARGEUR_SOL = 2 * LARGEUR_ECRAN
+NOIR = (0, 0, 0)
+
 arriere_plan = ArrierePlan(LARGEUR_SOL - 20)
 
 pygame.init()
-
+font = pygame.font.SysFont('Arial', 48)
 musique = Musique()
 screen = pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
 pygame.display.set_caption('Happy Bird')
@@ -66,7 +69,8 @@ while begin:
 
     pygame.display.update()
 
-while True:
+running = True
+while running:
 
     clock.tick(15)
 
@@ -88,9 +92,7 @@ while True:
     if arriere_plan.is_off_screen(pipe_group.sprites()[0]):
         pipe_group.remove(pipe_group.sprites()[0])
         pipe_group.remove(pipe_group.sprites()[0])
-
         pipes = arriere_plan.get_random_obstacle(LARGEUR_ECRAN * 2)
-
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
 
@@ -106,5 +108,15 @@ while True:
 
     if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
             pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
-        # ajouter une musique de fin
-        break
+            print('Colision')
+            running = False
+            running = False
+
+             #ajouter une musique de fin
+            text = font.render('Nouvelle Partie', True, NOIR)
+            textRect = text.get_rect()
+            textRect.center = (LARGEUR_ECRAN/2, HAUTEUR_ECRAN/2)
+            screen.blit(text, (20,20))
+            pygame.display.flip()
+           
+            
