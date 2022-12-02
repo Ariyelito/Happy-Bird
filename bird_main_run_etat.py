@@ -1,4 +1,6 @@
 import pygame
+from pygame import MOUSEBUTTONUP
+
 from background import *
 from bird import *
 from obstacle import *
