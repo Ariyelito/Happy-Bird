@@ -5,6 +5,7 @@ Created on 27 avr. 2022
 '''
 import pygame
 
+
 class Obstacle(pygame.sprite.Sprite):
 
     def __init__(self, inverse, xpos, ydimenssion):
@@ -18,9 +19,8 @@ class Obstacle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         pygame.init()
         pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
-        self. image = pygame.image.load('img/background/Obstacle.png').convert_alpha()
+        self.image = pygame.image.load('img/background/Obstacle.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGEUR_OBSTACLE, HAUTEUR_OBSTACLE))
-
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos

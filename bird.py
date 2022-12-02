@@ -32,6 +32,6 @@ class Bird(pygame.sprite.Sprite):
         self.rect[1] += self.vitesse
 
     def saut(self):
-        self.vitesse = -20
+        self.vitesse = -10
 
 
