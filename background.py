@@ -22,7 +22,7 @@ class ArrierePlan(pygame.sprite.Sprite):
         pygame.init()
         pygame.display.set_mode((self.LARGEUR_ECRAN, self.HAUTEUR_ECRAN))
         self.image = pygame.image.load('img/background/ground.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image, (3* self.HAUTEUR_ECRAN, self.HAUTEUR_SOL))
+        self.image = pygame.transform.scale(self.image, (3 * self.HAUTEUR_ECRAN, self.HAUTEUR_SOL))
 
         self.rect = self.image.get_rect()
         self.rect[0] = xpos
