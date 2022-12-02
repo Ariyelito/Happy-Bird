@@ -1,0 +1,6 @@
+_pycache_/
+*.pyc
+__pycache__/obstacle.cpython-310.pyc
+__pycache__/musique.cpython-310.pyc
+__pycache__/bird.cpython-310.pyc
+__pycache__/background.cpython-310.pyc
