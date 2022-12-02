@@ -69,6 +69,7 @@ while begin:
     pygame.display.update()
 
 running = True
+gameover = False
 while running:
 
     clock.tick(15)
@@ -95,27 +96,54 @@ while running:
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
 
+
     bird_group.update()
     ground_group.update()
     pipe_group.update()
-
     bird_group.draw(screen)
     pipe_group.draw(screen)
     ground_group.draw(screen)
 
-    pygame.display.update()
+    if(gameover == False):
+        pygame.display.update()
 
-    if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
-            pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
-            print('Colision')
-            running = False
-            running = False
+    if(gameover == False):
+        if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
+                pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
+                print('Colision')
+                gameover = True
 
-             #ajouter une musique de fin
-            text = font.render('Nouvelle Partie', True, NOIR)
-            textRect = text.get_rect()
-            textRect.center = (LARGEUR_ECRAN/2, HAUTEUR_ECRAN/2)
-            screen.blit(text, (20,20))
-            pygame.display.flip()
+                #ajouter une musique de fin
+                text = font.render('Game over', True, NOIR)
+                text2 = font.render('Voulez-vous jouer encore?', True, NOIR)
+                textRect = text.get_rect()
+                textRect.center = (LARGEUR_ECRAN/2, HAUTEUR_ECRAN/2)
+
+                text2 = font.render('Voulez-vous jouer encore?', True, NOIR)
+                text2Rect = text2.get_rect()
+                text2Rect.center = (int(LARGEUR_ECRAN / 2), int(HAUTEUR_ECRAN / 2) + 50)
+
+                oui = font.render('Oui', True, NOIR)
+                ouiRect = oui.get_rect()
+                ouiRect.center = (int(LARGEUR_ECRAN / 2) - 60, int(HAUTEUR_ECRAN / 2) + 90)
+
+                non = font.render('Non', True, NOIR)
+                nonRect = non.get_rect()
+                nonRect.center = (int(LARGEUR_ECRAN / 2) + 60, int(LARGEUR_ECRAN / 2) + 90)
+                screen.blit(text, (20,20))
+                screen.blit(text2, (20,60))
+                screen.blit(oui, (20,100))
+                screen.blit(non, (100,100))
+                # voulez vous continuer a jouer
+                for event in pygame.event.get():
+                    if event.type == MOUSEBUTTONUP:
+                        xSouris, ySouris = event.pos
+                        if ouiRect.collidepoint((xSouris, ySouris)):
+                            print('oui')
+                            begin = True
+                        elif nonRect.collidepoint((xSouris, ySouris)):
+                            print('non')
+                            pygame.exit()
+                pygame.display.flip()
            
             
