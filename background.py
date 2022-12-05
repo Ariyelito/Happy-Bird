@@ -31,10 +31,10 @@ class ArrierePlan(pygame.sprite.Sprite):
     def update(self):
         self.rect[0] -= self.VITESSE_JEU
 
-    def is_off_screen(self,sprite):
+    def hors_ecran(self,sprite):
          return sprite.rect[0] < -(sprite.rect[2])
 
-    def get_random_obstacle(self,xpos):
+    def obstacle_aleatoire(self,xpos):
         hauteur = random.randint(102, 300)
         obstacle = Obstacle(False, xpos, hauteur)
         obstacle_inverse = Obstacle(True, xpos, self.HAUTEUR_ECRAN - hauteur - self.ESPACE_OBSTACLE)
