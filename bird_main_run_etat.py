@@ -15,12 +15,13 @@ LARGEUR_SOL = 2 * LARGEUR_ECRAN
 NOIR = (0, 0, 0)
 ROUGE = (255, 0, 0)
 VERT = (0, 155, 0)
+
 BACKGROUND = pygame.image.load('img/background/flappy_bird_bg3.png')
 BACKGROUND = pygame.transform.scale(BACKGROUND, (LARGEUR_ECRAN, HAUTEUR_ECRAN))
 BACKGROUND2 = pygame.image.load('img/background/start.png').convert_alpha()
 BACKGROUND2 = pygame.transform.rotozoom(BACKGROUND2,0, 0.3)
 
-arriere_plan = ArrierePlan(LARGEUR_SOL - 20)
+arriere_plan_sol = sol(LARGEUR_SOL - 20)
 screen = pygame.display.set_mode((LARGEUR_ECRAN, HAUTEUR_ECRAN))
 
 bird = Bird()
@@ -41,11 +42,11 @@ def main():
     bird_group.add(bird)
 
     for i in range(2):
-        ground = ArrierePlan(LARGEUR_SOL * i)
+        ground = sol(LARGEUR_SOL * i)
         ground_group.add(ground)
     
     for i in range(2):
-        pipes = arriere_plan.obstacle_aleatoire(LARGEUR_ECRAN * i + 800)
+        pipes = arriere_plan_sol.obstacle_aleatoire(LARGEUR_ECRAN * i + 800)
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
 
@@ -115,10 +116,10 @@ def jouer():
         screen.blit(BACKGROUND2, (150, -100))
     
 
-        if arriere_plan.hors_ecran(ground_group.sprites()[0]):
+        if arriere_plan_sol.hors_ecran(ground_group.sprites()[0]):
             ground_group.remove(ground_group.sprites()[0])
 
-            new_ground = ArrierePlan(LARGEUR_SOL - 20)
+            new_ground = sol(LARGEUR_SOL - 20)
             ground_group.add(new_ground)
 
         ground_group.update()
@@ -141,16 +142,16 @@ def jouer():
 
         screen.blit(BACKGROUND, (0, 0))
 
-        if arriere_plan.hors_ecran(ground_group.sprites()[0]):
+        if arriere_plan_sol.hors_ecran(ground_group.sprites()[0]):
             ground_group.remove(ground_group.sprites()[0])
 
-            new_ground = ArrierePlan(LARGEUR_SOL - 20)
+            new_ground = sol(LARGEUR_SOL - 20)
             ground_group.add(new_ground)
 
-        if arriere_plan.hors_ecran(pipe_group.sprites()[0]):
+        if arriere_plan_sol.hors_ecran(pipe_group.sprites()[0]):
             pipe_group.remove(pipe_group.sprites()[0])
             pipe_group.remove(pipe_group.sprites()[0])
-            pipes = arriere_plan.obstacle_aleatoire(LARGEUR_ECRAN * 2)
+            pipes = arriere_plan_sol.obstacle_aleatoire(LARGEUR_ECRAN * 2)
             pipe_group.add(pipes[0])
             pipe_group.add(pipes[1])
 

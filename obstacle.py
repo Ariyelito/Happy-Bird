@@ -1,8 +1,3 @@
-'''
-Created on 27 avr. 2022
-
-@author: gills
-'''
 import pygame
 
 

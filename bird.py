@@ -1,8 +1,3 @@
-'''
-Created on 27 avr. 2022
-
-@author: gills
-'''
 import pygame
 
 class Bird(pygame.sprite.Sprite):
@@ -33,5 +28,3 @@ class Bird(pygame.sprite.Sprite):
 
     def saut(self):
         self.vitesse = -10
-
-

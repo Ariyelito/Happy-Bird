@@ -1,13 +1,9 @@
-'''
-Explication du scroll ici
-https://stackoverflow.com/questions/55050166/making-the-background-move-sideways-in-pygame
-'''
 import pygame
 import random
 from obstacle import *
 
 
-class ArrierePlan(pygame.sprite.Sprite):
+class sol(pygame.sprite.Sprite):
     
     def __init__(self, xpos):
 
